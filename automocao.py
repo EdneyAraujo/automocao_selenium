@@ -1,17 +1,29 @@
 from selenium import webdriver
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.chrome.service import Service
-from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.common.by import By
+import time
+#rom selenium.webdriver.common.keys import Keys
 
+chrome_options = Options()
+chrome_options.add_experimental_option("detach", True)
 servico = Service(ChromeDriverManager().install())
+navegador = webdriver.Chrome(service=servico, options=chrome_options)
 
 navegador = webdriver.Chrome(service=servico)
+
+#ABRE O NAVEGADOR
 navegador.get("https://sistemas.ufmt.br/ufmt.portalsistemas")
 
+navegador.find_element('xpath', '//*[@id="usuario"]').send_keys("0544102")
+navegador.find_element('xpath', '//*[@id="senha"]').send_keys("msal")
+navegador.find_element('xpath', '/html/body/main/div[2]/div/form/div/div[3]/button').click()
+time.sleep(10)
 # Encontrar o campo de entrada de texto e preenchê-lo
 #navegador = webdriver.Chrome()
-#campo_texto = navegador.find_element_by_id("//*[@id="usuario"]")
-#campo_texto.send_keys("6537421")
+#campo_texto = navegador.find_element_by_id('xpath','/html/body/main/div[2]/div/form/div/div[1]/input')
+#campo_texto.send_keys('6537421')
 
-botao_enviar = navegador.find_element_by_id('xpath','/html/body/main/div[2]/div/form/div/div[3]/button')
-botao_enviar.click()
+#botao_enviar = navegador.find_element_by_id('xpath','//*[@id="usuario"]')
+#botao_enviar.click()
